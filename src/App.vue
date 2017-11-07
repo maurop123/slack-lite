@@ -1,98 +1,35 @@
 <template>
-  <v-app light>
-    <v-navigation-drawer
-      persistent
-      :mini-variant="miniVariant"
-      :clipped="clipped"
-      v-model="drawer"
-      enable-resize-watcher
-      app
-    >
-      <v-list>
-        <v-list-tile
-          value="true"
-          v-for="(item, i) in items"
-          :key="i"
-        >
-          <v-list-tile-action>
-            <v-icon light v-html="item.icon"></v-icon>
-          </v-list-tile-action>
-          <v-list-tile-content>
-            <v-list-tile-title v-text="item.title"></v-list-tile-title>
-          </v-list-tile-content>
-        </v-list-tile>
-      </v-list>
-    </v-navigation-drawer>
-    <v-toolbar fixed app :clipped-left="clipped">
-      <v-toolbar-side-icon @click.stop="drawer = !drawer" light></v-toolbar-side-icon>
-      <v-btn
-        icon
-        light
-        @click.stop="miniVariant = !miniVariant"
-      >
-        <v-icon v-html="miniVariant ? 'chevron_right' : 'chevron_left'"></v-icon>
-      </v-btn>
-      <v-btn
-        icon
-        light
-        @click.stop="clipped = !clipped"
-      >
-        <v-icon>web</v-icon>
-      </v-btn>
-      <v-btn
-        icon
-        light
-        @click.stop="fixed = !fixed"
-      >
-        <v-icon>remove</v-icon>
-      </v-btn>
-      <v-toolbar-title v-text="title"></v-toolbar-title>
-      <v-spacer></v-spacer>
-      <v-btn
-        icon
-        light
-        @click.stop="rightDrawer = !rightDrawer"
-      >
-        <v-icon>menu</v-icon>
-      </v-btn>
-    </v-toolbar>
-    <main>
-      <v-content>
-        <v-container fluid>
-          <v-slide-y-transition mode="out-in">
-            <v-layout column align-center>
-              <img src="/static/img/v.png" alt="Vuetify.js" class="mb-5">
-              <blockquote>
-                &#8220;First, solve the problem. Then, write the code.&#8221;
-                <footer>
-                  <small>
-                    <em>&mdash;John Johnson</em>
-                  </small>
-                </footer>
-              </blockquote>
+  <v-app>
+    <v-container>
+      <v-layout column>
+        <v-flex>
+          <v-list v-for="msg in messageList" v-bind:key="msg.timestamp">
+            <v-list-tile>
+              {{ msg.text }}
+            </v-list-tile>
+            <v-divider></v-divider>
+          </v-list>
+        </v-flex>
+        <v-flex>
+          <form v-on:submit.prevent="sendMessage">
+            <v-layout>
+              <v-flex>
+                <v-text-field
+                  label="Message"
+                  v-model="message"
+                  ></v-text-field>
+              </v-flex>
+              <v-flex xs1>
+                <v-btn flat icon color="blue"
+                  v-on:click="sendMessage">
+                  <v-icon>send</v-icon>
+                </v-btn>
+              </v-flex>
             </v-layout>
-          </v-slide-y-transition>
-        </v-container>
-      </v-content>
-    </main>
-    <v-navigation-drawer
-      temporary
-      :right="right"
-      v-model="rightDrawer"
-      app
-    >
-      <v-list>
-        <v-list-tile @click="right = !right">
-          <v-list-tile-action>
-            <v-icon light>compare_arrows</v-icon>
-          </v-list-tile-action>
-          <v-list-tile-title>Switch drawer (click me)</v-list-tile-title>
-        </v-list-tile>
-      </v-list>
-    </v-navigation-drawer>
-    <v-footer :fixed="fixed" app>
-      <span>&copy; 2017</span>
-    </v-footer>
+          </form>
+        </v-flex>
+      </v-layout>
+    </v-container>
   </v-app>
 </template>
 
@@ -100,17 +37,26 @@
   export default {
     data () {
       return {
-        clipped: false,
-        drawer: true,
-        fixed: false,
-        items: [
-          { icon: 'bubble_chart', title: 'Inspire' }
-        ],
-        miniVariant: false,
-        right: true,
-        rightDrawer: false,
-        title: 'Vuetify.js'
+        message: '',
+        messageList: [],
+      }
+    },
+    methods: {
+      sendMessage() {
+        const now = new Date()
+        const messageObj = {
+          text: this.message,
+          timestamp: now.getTime()
+        }
+        this.messageList.push(messageObj)
+        this.message = ''
       }
     }
   }
 </script>
+
+<style>
+  .application--light .list {
+    background: none;
+  }
+</style>
