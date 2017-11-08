@@ -1,7 +1,5 @@
 <template>
-  <v-app>
-    <router-view></router-view>
-  </v-app>
+  <h1>Hey Slacker!</h1>
 </template>
 
 <script>
