@@ -1,6 +1,6 @@
 <template>
   <v-app>
-    <v-container>
+    <v-container fill-height>
       <v-layout column>
         <v-flex>
           <v-list>
@@ -53,5 +53,8 @@
 <style>
  .application--light .list {
    background: none;
+ }
+ .container.fill-height {
+   align-items: flex-end;
  }
 </style>
