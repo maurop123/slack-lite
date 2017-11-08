@@ -34,17 +34,23 @@
     data() {
       return {
         email: '',
-        password: '',
+        password: ''
       }
     },
     methods: {
       login() {
-        const {email, password, auth} = this
-        return auth.signInWithEmailAndPassword(email, password)
+        const {email, password, auth, $router} = this
+        auth.signInWithEmailAndPassword(email, password)
+        .then(function() {
+          $router.push('/')
+        })
       },
       createAccount() {
-        const {email, password, auth} = this
-        return auth.createUserWithEmailAndPassword(email, password)
+        const {email, password, auth, $router} = this
+        auth.createUserWithEmailAndPassword(email, password)
+        .then(function() {
+          $router.push('/')
+        })
       },
     },
   }
