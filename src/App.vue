@@ -8,7 +8,7 @@
             v-model="message"
             ></v-text-field>
         </v-flex>
-        <v-flex>
+        <v-flex xs1>
           <v-btn flat icon color="blue"
             v-on:click="sendMessage">
             <v-icon>send</v-icon>
