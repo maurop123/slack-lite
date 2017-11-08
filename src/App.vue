@@ -10,7 +10,7 @@
         <v-btn v-else flat to="/login">Logout</v-btn>
       </v-toolbar-items>
     </v-toolbar>
-    <router-view v-bind="{ auth }"></router-view>
+    <router-view v-bind="{ db, auth, user }"></router-view>
   </v-app>
 </template>
 
