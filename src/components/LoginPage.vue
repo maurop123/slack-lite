@@ -25,6 +25,15 @@
         </v-card>
       </v-flex>
     </v-layout>
+    <v-snackbar
+      :timeout="3000"
+      bottom
+      v-model="snackbar"
+      multi-line
+    >
+      {{ error }}
+      <v-btn flat color="blue" @click.native="snackbar = false">Close</v-btn>
+    </v-snackbar>
   </v-container>
 </template>
 
@@ -34,7 +43,9 @@
     data() {
       return {
         email: '',
-        password: ''
+        password: '',
+        error: '',
+        snackbar: false
       }
     },
     methods: {
@@ -44,12 +55,20 @@
         .then(function() {
           $router.push('/')
         })
+        .catch((err) => {
+          this.error = err.message
+          this.snackbar = true
+        })
       },
       createAccount() {
         const {email, password, auth, $router} = this
         auth.createUserWithEmailAndPassword(email, password)
         .then(function() {
           $router.push('/')
+        })
+        .catch((err) => {
+          this.error = err.message
+          this.snackbar = true
         })
       },
     },

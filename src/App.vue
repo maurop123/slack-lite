@@ -7,6 +7,7 @@
       <v-spacer></v-spacer>
       <v-toolbar-items>
         <v-btn v-if="user === null" flat to="/login">Login</v-btn>
+        <v-btn v-else flat to="/login">Logout</v-btn>
       </v-toolbar-items>
     </v-toolbar>
     <router-view v-bind="{ auth }"></router-view>
