@@ -7,7 +7,7 @@
             <v-list-tile>
               <v-list-tile-content>
                 <v-list-tile-sub-title>
-                  {{ msg.user }}
+                  {{ msg.user }} - {{ formatTime(msg.timestamp) }}
                 </v-list-tile-sub-title>
                 <v-list-tile-title>
                   {{ msg.text }}
@@ -35,28 +35,48 @@
         </v-layout>
       </v-flex>
     </v-layout>
+    <v-snackbar
+      :timeout="3000"
+      bottom
+      v-model="snackbar"
+      multi-line
+    >
+      {{ error }}
+      <v-btn flat color="blue" @click.native="snackbar = false">Close</v-btn>
+    </v-snackbar>
   </v-container>
 </template>
 
 <script>
+  import moment from 'moment'
+
   export default {
     props: ['db', 'user'],
     data () {
       return {
         message: '',
-        messageList: []
+        messageList: [],
+        error: '',
+        snackbar: false
       }
     },
     methods: {
       sendMessage: function() {
-        const now = new Date()
-        const messageObject = {
-          user: this.user.email,
-          timestamp: now.getTime(),
-          text: this.message
+        if (this.user !== null) {
+          const messageObject = {
+            user: this.user.email,
+            timestamp: moment().unix(),
+            text: this.message
+          }
+          this.db.ref('messages').push(messageObject)
+          this.message = ''
+        } else {
+          this.error = 'Need to be logged in to do that',
+          this.snackbar = true
         }
-        this.db.ref('messages').push(messageObject)
-        this.message = ''
+      },
+      formatTime(t) {
+        return moment(t, 'X').fromNow()
       }
     },
     mounted() {
