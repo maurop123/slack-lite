@@ -3,6 +3,15 @@
     <v-container>
       <v-layout>
         <v-flex>
+          <v-list v-for="msg in messageList">
+            <v-list-tile>
+              {{ msg }}
+            </v-list-tile>
+          </v-list>
+        </v-flex>
+      </v-layout>
+      <v-layout>
+        <v-flex>
           <v-text-field
             label="Message"
             v-model="message"
