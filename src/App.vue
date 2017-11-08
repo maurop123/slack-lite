@@ -4,9 +4,11 @@
       <v-layout>
         <v-flex>
           <v-list>
-            <v-list-tile v-for="msg in messageList">
-              {{ msg }}
-            </v-list-tile>
+            <template v-for="msg in messageList">
+              <v-list-tile>
+                {{ msg }}
+              </v-list-tile>
+            </template>
           </v-list>
         </v-flex>
       </v-layout>
