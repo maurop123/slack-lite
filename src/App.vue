@@ -3,8 +3,8 @@
     <v-container>
       <v-layout>
         <v-flex>
-          <v-list v-for="msg in messageList">
-            <v-list-tile>
+          <v-list>
+            <v-list-tile v-for="msg in messageList">
               {{ msg }}
             </v-list-tile>
           </v-list>
