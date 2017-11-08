@@ -9,8 +9,9 @@
             ></v-text-field>
         </v-flex>
         <v-flex>
-          <v-btn flat icon color="pink">
-            <v-icon>favorite</v-icon>
+          <v-btn flat icon color="blue"
+            v-on:click="sendMessage">
+            <v-icon>send</v-icon>
           </v-btn>
         </v-flex>
       </v-layout>
@@ -22,7 +23,13 @@
   export default {
     data () {
       return {
-        message: ''
+        message: '',
+        messageList: []
+      }
+    },
+    methods: {
+      sendMessage: function() {
+        this.messageList.push(this.message)
       }
     }
   }
