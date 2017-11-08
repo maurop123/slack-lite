@@ -4,9 +4,8 @@
       <v-layout>
         <v-flex>
           <v-text-field
-            name="input-1"
-            label="Label Text"
-            id="testing"
+            label="Message"
+            v-model="message"
             ></v-text-field>
         </v-flex>
       </v-layout>
@@ -18,6 +17,7 @@
   export default {
     data () {
       return {
+        message: ''
       }
     }
   }
