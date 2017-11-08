@@ -9,7 +9,7 @@
         <v-btn v-if="user === null" flat to="/login">Login</v-btn>
       </v-toolbar-items>
     </v-toolbar>
-    <router-view v-bind="{ auth }"></router-view>
+    <router-view v-bind="{ db, auth, user }"></router-view>
   </v-app>
 </template>
 

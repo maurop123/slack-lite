@@ -2,10 +2,17 @@
   <v-container fill-height>
     <v-layout column>
       <v-flex>
-        <v-list>
+        <v-list two-line>
           <template v-for="msg in messageList">
             <v-list-tile>
-              {{ msg }}
+              <v-list-tile-content>
+                <v-list-tile-sub-title>
+                  {{ msg.user }}
+                </v-list-tile-sub-title>
+                <v-list-tile-title>
+                  {{ msg.text }}
+                </v-list-tile-title>
+              </v-list-tile-content>
             </v-list-tile>
             <v-divider></v-divider>
           </template>
@@ -33,6 +40,7 @@
 
 <script>
   export default {
+    props: ['db', 'user'],
     data () {
       return {
         message: '',
@@ -41,9 +49,24 @@
     },
     methods: {
       sendMessage: function() {
-        this.messageList.push(this.message)
+        const now = new Date()
+        const messageObject = {
+          user: this.user.email,
+          timestamp: now.getTime(),
+          text: this.message
+        }
+        this.db.ref('messages').push(messageObject)
         this.message = ''
       }
+    },
+    mounted() {
+      this.db.ref('messages').on('value', snapshot => {
+        let messages = snapshot.val()
+        if (messages) {
+          messages = Object.keys(messages).map(key => messages[key])
+          this.messageList = messages
+        }
+      })
     }
   }
 </script>
