@@ -1,6 +1,15 @@
 <template>
   <v-app>
-    <router-view v-bind="{ auth }" ></router-view>
+    <v-toolbar color="purple darken-4" dark>
+      <v-toolbar-title>
+        <v-btn flat @click="$router.push('/')">Slack Lite</v-btn>
+      </v-toolbar-title>
+      <v-spacer></v-spacer>
+      <v-toolbar-items>
+        <v-btn flat to="/login">Login</v-btn>
+      </v-toolbar-items>
+    </v-toolbar>
+    <router-view v-bind="{ auth }"></router-view>
   </v-app>
 </template>
 

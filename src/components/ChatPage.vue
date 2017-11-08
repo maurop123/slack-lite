@@ -1,31 +1,31 @@
 <template>
-  <v-container>
+  <v-container fill-height>
     <v-layout column>
       <v-flex>
-        <v-list v-for="msg in messageList" v-bind:key="msg.timestamp">
-          <v-list-tile>
-            {{ msg.text }}
-          </v-list-tile>
-          <v-divider></v-divider>
+        <v-list>
+          <template v-for="msg in messageList">
+            <v-list-tile>
+              {{ msg }}
+            </v-list-tile>
+            <v-divider></v-divider>
+          </template>
         </v-list>
       </v-flex>
       <v-flex>
-        <form v-on:submit.prevent="sendMessage">
-          <v-layout>
-            <v-flex>
-              <v-text-field
-                label="Message"
-                v-model="message"
-                ></v-text-field>
-            </v-flex>
-            <v-flex xs1>
-              <v-btn flat icon color="blue"
-                v-on:click="sendMessage">
-                <v-icon>send</v-icon>
-              </v-btn>
-            </v-flex>
-          </v-layout>
-        </form>
+        <v-layout>
+          <v-flex>
+            <v-text-field
+              label="Message"
+              v-model="message"
+              ></v-text-field>
+          </v-flex>
+          <v-flex xs1>
+            <v-btn flat icon color="blue"
+              v-on:click="sendMessage">
+              <v-icon>send</v-icon>
+            </v-btn>
+          </v-flex>
+        </v-layout>
       </v-flex>
     </v-layout>
   </v-container>
@@ -36,17 +36,12 @@
     data () {
       return {
         message: '',
-        messageList: [],
+        messageList: []
       }
     },
     methods: {
-      sendMessage() {
-        const now = new Date()
-        const messageObj = {
-          text: this.message,
-          timestamp: now.getTime()
-        }
-        this.messageList.push(messageObj)
+      sendMessage: function() {
+        this.messageList.push(this.message)
         this.message = ''
       }
     }
@@ -56,5 +51,8 @@
 <style>
   .application--light .list {
     background: none;
+  }
+  .container.fill-height {
+    align-items: flex-end;
   }
 </style>
