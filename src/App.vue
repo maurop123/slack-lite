@@ -8,6 +8,7 @@
               <v-list-tile>
                 {{ msg }}
               </v-list-tile>
+              <v-divider></v-divider>
             </template>
           </v-list>
         </v-flex>
@@ -43,7 +44,14 @@
     methods: {
       sendMessage: function() {
         this.messageList.push(this.message)
+        this.message = ''
       }
     }
   }
 </script>
+
+<style>
+ .application--light .list {
+   background: none;
+ }
+</style>
