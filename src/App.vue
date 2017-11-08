@@ -6,7 +6,7 @@
       </v-toolbar-title>
       <v-spacer></v-spacer>
       <v-toolbar-items>
-        <v-btn flat to="/login">Login</v-btn>
+        <v-btn v-if="user === null" flat to="/login">Login</v-btn>
       </v-toolbar-items>
     </v-toolbar>
     <router-view v-bind="{ auth }"></router-view>
@@ -26,8 +26,14 @@
     data () {
       return {
         db: firebaseApp.database(),
-        auth: firebase.auth()
+        auth: firebase.auth(),
+        user: null
       }
+    },
+    mounted() {
+      this.auth.onAuthStateChanged((user) => {
+        this.user = user
+      })
     }
   }
 </script>
