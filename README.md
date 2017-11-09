@@ -1,4 +1,4 @@
-# chat-app
+# slack-lite
 
 > A Vue.js project
 

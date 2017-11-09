@@ -1,6 +1,6 @@
 {
-  "name": "chat-app",
-  "short_name": "chat-app",
+  "name": "slack-lite",
+  "short_name": "slack-lite",
   "icons": [
     {
       "src": "img/icons/android-chrome-192x192.png",
