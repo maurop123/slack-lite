@@ -2,6 +2,15 @@
 
 > A Vue.js project
 
+## Make it your own
+
+### Without forking
+- Clone this repo
+- Make your own repo
+- Change the origin `git remote set-url origin https://github.com/repo_owner/repo_name.git`
+- Set new master `git push -u origin master`
+- You should see slack-lite code in your repo. Enjoy!
+
 ## Build Setup
 
 ``` bash
